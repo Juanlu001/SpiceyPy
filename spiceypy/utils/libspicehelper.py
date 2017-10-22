@@ -22,16 +22,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-from ctypes import CDLL, POINTER, c_bool, c_int, c_double, c_char, c_char_p, c_void_p
-import os
+from ctypes import cdll, POINTER, c_bool, c_int, c_double, c_char, c_char_p, c_void_p
 import platform
 from . import support_types as stypes
 from . import callbacks
 
 host_OS = platform.system()
-sharedLib = "cspice.dll" if host_OS == "Windows" else "spice.so"
-sitePath = os.path.join(os.path.dirname(__file__), sharedLib)
-libspice = CDLL(sitePath)
+sharedLib = "cspice.dll" if host_OS == "Windows" else "libcspice.so"
+libspice = cdll.LoadLibrary(sharedLib)
 
 __author__ = 'AndrewAnnex'
 
