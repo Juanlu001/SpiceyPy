@@ -23,15 +23,14 @@ SOFTWARE.
 """
 
 from ctypes import CDLL, POINTER, c_int, c_double, c_char, c_char_p, c_void_p
-import os
-import platform
+from ctypes.util import find_library
+
 from . import support_types as stypes
 from . import callbacks
 
-host_OS = platform.system()
-sharedLib = "cspice.dll" if host_OS == "Windows" else "spice.so"
-sitePath = os.path.join(os.path.dirname(__file__), sharedLib)
-libspice = CDLL(sitePath)
+# Simpler function find_library won't work at the moment, see
+# https://github.com/conda-forge/cspice-feedstock/issues/4
+libspice = CDLL(find_library("cspice"))
 
 s_cell_p = POINTER(stypes.SpiceCell)
 s_elip_p = POINTER(stypes.Ellipse)
