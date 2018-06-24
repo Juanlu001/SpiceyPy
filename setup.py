@@ -88,7 +88,6 @@ setup(
     include_package_data=True,
     zip_safe=False,
     package_data={'spiceypy': ['utils/*.so', "utils/*.dll"]},
-    setup_requires=DEPENDENCIES,
     install_requires=DEPENDENCIES,
     requires=REQUIRES,
     tests_require=TEST_DEPENDENCIES,
